@@ -59,7 +59,7 @@ public class NoteRepository {
 		return createdItem;
     }
 
-    public void update(int noteId, Note item) {
+    public Note update(int noteId, Note item) {
 
     	String query = "update notes set title = ?, text = ? where id = ?";
 
@@ -73,6 +73,8 @@ public class NoteRepository {
 		            return ps;
 		        }
 		    });
+
+    	return this.fetch(noteId);
     }
 
     public void delete(int noteId) {

@@ -50,9 +50,9 @@ public class NotesController {
 	@RequestMapping(value="/{noteId}", method=RequestMethod.PUT, consumes = "application/json")
 	public Response update(@PathVariable Integer noteId, @RequestBody Note note) {
 
-		noteRepo.update(noteId, note);
+		Note updatedItem = noteRepo.update(noteId, note);
 
-        return new Response("Note Updated", note);
+        return new Response("Note Updated", updatedItem);
 
 	}
 
