@@ -23,7 +23,8 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    testCompile("junit:junit")
+    compile("org.springframework:spring-jdbc")
+    compile("mysql:mysql-connector-java")
 }
 
 task wrapper(type: Wrapper) {
