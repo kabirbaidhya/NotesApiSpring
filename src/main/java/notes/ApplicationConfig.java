@@ -10,8 +10,8 @@ public class ApplicationConfig {
 
 	private static final String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/notesapp";
-    private static final String DATABASE_USERNAME = "root";
-    private static final String DATABASE_PASSWORD = "GodBlessYou";
+    private static final String DATABASE_USERNAME = "foobar";
+    private static final String DATABASE_PASSWORD = "test";
 
 	
 	@Bean
