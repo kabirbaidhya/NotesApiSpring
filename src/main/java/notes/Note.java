@@ -5,56 +5,67 @@ import java.util.Date;
 
 public class Note {
 
-    private Integer id;
-    private String content;
-    private Date createdAt;
-    private Date updatedAt;
+	final static String DATE_FORMAT = "MMM dd, Y";
+	final static int PREVIEW_TEXT_SIZE = 50;
+
+    private Integer id = null;
+    private String title = "";
+    private String text = "";
+    private Date createdAt = new Date();
 
     public Note() {}
 
-    public Note(Integer id, String content) {
-        this.setId(id);
-        this.setContent(content);
-        createdAt = updatedAt = new Date();
+    public Note(String title, String text) {
+        this.setTitle(title);
+        this.setText(text);
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getContent() {
-        return content;
+    public String getTitle() {
+        return title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getPreviewText() {
+        return shortenString(text, PREVIEW_TEXT_SIZE);
     }
 
     public String getCreatedAt() {
-    	return getFormattedDate(createdAt);
-    }
-
-    public String getUpdatedAt() {
-    	return getFormattedDate(updatedAt);
+    	return formatDate(createdAt);
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setContent(String content) {
-        this.content =  content;
+    public void setTitle(String title) {
+        this.title =  title;
+    }
+
+    public void setText(String text) {
+        this.text =  text;
     }
 
     public void setCreatedAt(Date date) {
         this.createdAt = date;
     }
 
-    public void setUpdatedAt(Date date) {
-        this.updatedAt = date;
-    }
+    private static String formatDate(Date date) {
 
-    private static String getFormattedDate(Date date) {
-
-    	SimpleDateFormat formatter = new SimpleDateFormat("D, MMM Y");
+    	SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 
         return formatter.format(date);
     }
 
+    private static String shortenString(String originalText, int maxSize) {
+        
+        return (originalText.length() <= maxSize) ? originalText : originalText.substring(0, maxSize) + "...";
+    }
+    
 }

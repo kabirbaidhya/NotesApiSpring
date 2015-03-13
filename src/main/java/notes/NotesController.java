@@ -6,41 +6,57 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/notes")
 public class NotesController {
 
+	/**
+	 * Fetches a collection of notes
+	 */
 	@RequestMapping(method = RequestMethod.GET)
     public Note[] index() {
 
         return new Note[] {
-        	new Note(1, "Item 1"),
-        	new Note(2, "Item 2"),
-        	new Note(3, "Item 3"),
+        	new Note("Item 1", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et"),
+        	new Note("Item 2", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et"),
+        	new Note("Item 3", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et")
         };
+
     }
 
+    /**
+	 * Fetches a Single note
+	 */
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Note show(@PathVariable Integer id) {
 
-        return new Note(id, "Item");
+        return new Note("Item 1", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et");
 
 	}
 
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Note update(@PathVariable Integer id) {
+	/**
+	 * Creates a new Note
+	 */
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+    public Response store(@RequestBody Note note) {
 
-        return new Note(1, "Item");
-
-	}
-
-    @RequestMapping(method = RequestMethod.POST)
-    public Note store(Note note) {
-
-    	return note;
+    	return new Response("Note Created", note);
 
     }
 
+	/**
+	 * Updates a note
+	 */
+	@RequestMapping(value="/{noteId}", method=RequestMethod.PUT, consumes = "application/json")
+	public Response update(@PathVariable Integer noteId, @RequestBody Note note) {
+
+        return new Response("Note Updated", note);
+
+	}
+
+	/**
+	 * Deletes a note
+	 */
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public Note destroy(@PathVariable Integer id) {
+	public Response destroy(@PathVariable Integer id) {
     	
-    	return new Note(1, "Item");
+    	return new Response("Note Deleted");
         
 	}
 }
